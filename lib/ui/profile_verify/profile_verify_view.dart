@@ -23,63 +23,65 @@ class ProfileVerifyView extends StatelessWidget {
           child: Scaffold(
             backgroundColor: Theme.of(context).canvasColor,
             body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Verify yout identity',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
-                  ),
-                  AvatarImageView(
-                    onTap: () {
-                      context.read<ProfileVerifyCubit>().pickImage();
-                    },
-                    child: snapshot.file != null
-                        ? Image.file(snapshot.file, fit: BoxFit.cover)
-                        : Icon(Icons.person_outline,
-                            size: 100, color: Colors.grey[400]),
-                  ),
-                  Text(
-                    'Your name',
-                    style: TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                    child: TextField(
-                      controller:
-                          context.read<ProfileVerifyCubit>().nameController,
-                      decoration: InputDecoration(
-                          fillColor: Theme.of(context)
-                              .bottomNavigationBarTheme
-                              .backgroundColor,
-                          hintText: 'Or just how people now you',
-                          hintStyle:
-                              TextStyle(fontSize: 14, color: Colors.grey[400]),
-                          border: InputBorder.none,
-                          enabledBorder: InputBorder.none),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Verify yout identity',
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
                     ),
-                  ),
-                  Hero(
-                    tag: 'home_hero',
-                    child: Material(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      color: Theme.of(context).accentColor,
-                      child: InkWell(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 40, vertical: 15),
-                          child: Text('Start chatting now',
-                              style: TextStyle(color: Colors.white)),
-                        ),
-                        onTap: () {
-                          context.read<ProfileVerifyCubit>().startChatting();
-                        },
+                    AvatarImageView(
+                      onTap: () {
+                        context.read<ProfileVerifyCubit>().pickImage();
+                      },
+                      child: snapshot.file != null
+                          ? Image.file(snapshot.file, fit: BoxFit.cover)
+                          : Icon(Icons.person_outline,
+                              size: 100, color: Colors.grey[400]),
+                    ),
+                    Text(
+                      'Your name',
+                      style: TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                      child: TextField(
+                        controller:
+                            context.read<ProfileVerifyCubit>().nameController,
+                        decoration: InputDecoration(
+                            fillColor: Theme.of(context)
+                                .bottomNavigationBarTheme
+                                .backgroundColor,
+                            hintText: 'Or just how people now you',
+                            hintStyle:
+                                TextStyle(fontSize: 14, color: Colors.grey[400]),
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none),
                       ),
                     ),
-                  )
-                ],
+                    Hero(
+                      tag: 'home_hero',
+                      child: Material(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        color: Theme.of(context).accentColor,
+                        child: InkWell(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 15),
+                            child: Text('Start chatting now',
+                                style: TextStyle(color: Colors.white)),
+                          ),
+                          onTap: () {
+                            context.read<ProfileVerifyCubit>().startChatting();
+                          },
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

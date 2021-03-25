@@ -53,58 +53,60 @@ class GroupSelectionView extends StatelessWidget {
               elevation: 0,
               backgroundColor: Theme.of(context).canvasColor,
             ),
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                AvatarImageView(
-                  //TODO: implement change avatar
-                  onTap: () {
-                    context.read<GroupSelectionCubit>().pickImage();
-                  },
-                  child: snapshot?.file != null
-                      ? Image.file(snapshot.file, height: 150)
-                      : Icon(Icons.person_outline,
-                          size: 100, color: Colors.grey[400]),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                  child: TextField(
-                      controller:
-                          context.read<GroupSelectionCubit>().nameTextController,
-                      decoration: InputDecoration(
-                          fillColor: Theme.of(context)
-                              .bottomNavigationBarTheme
-                              .backgroundColor,
-                          hintText: 'Type group name',
-                          hintStyle:
-                              TextStyle(fontSize: 14, color: Colors.grey[400]),
-                          border: InputBorder.none,
-                          enabledBorder: InputBorder.none)),
-                ),
-                Wrap(
-                  children: List.generate(selectedUsers.length, (index) {
-                    final chatUserState = selectedUsers[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          CircleAvatar(
-                            radius: 30,
-                            backgroundImage: NetworkImage(chatUserState
-                                        .chatUser.image !=
-                                    null
-                                ? chatUserState.chatUser.image
-                                : 'https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=6&m=922962354&s=612x612&w=0&h=_KKNzEwxMkutv-DtQ4f54yA5nc39Ojb_KPvoV__aHyU='),
-                          ),
-                          Text(chatUserState.chatUser.name)
-                        ],
-                      ),
-                    );
-                  }),
-                ),
-              ],
+            body: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  AvatarImageView(
+                    //TODO: implement change avatar
+                    onTap: () {
+                      context.read<GroupSelectionCubit>().pickImage();
+                    },
+                    child: snapshot?.file != null
+                        ? Image.file(snapshot.file, height: 150)
+                        : Icon(Icons.person_outline,
+                            size: 100, color: Colors.grey[400]),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                    child: TextField(
+                        controller:
+                            context.read<GroupSelectionCubit>().nameTextController,
+                        decoration: InputDecoration(
+                            fillColor: Theme.of(context)
+                                .bottomNavigationBarTheme
+                                .backgroundColor,
+                            hintText: 'Type group name',
+                            hintStyle:
+                                TextStyle(fontSize: 14, color: Colors.grey[400]),
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none)),
+                  ),
+                  Wrap(
+                    children: List.generate(selectedUsers.length, (index) {
+                      final chatUserState = selectedUsers[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundImage: NetworkImage(chatUserState
+                                          .chatUser.image !=
+                                      null
+                                  ? chatUserState.chatUser.image
+                                  : 'https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=6&m=922962354&s=612x612&w=0&h=_KKNzEwxMkutv-DtQ4f54yA5nc39Ojb_KPvoV__aHyU='),
+                            ),
+                            Text(chatUserState.chatUser.name)
+                          ],
+                        ),
+                      );
+                    }),
+                  ),
+                ],
+              ),
             ),
           ),
         );
